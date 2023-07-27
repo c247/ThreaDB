@@ -8,6 +8,7 @@ BPlusTree::Node::Node(bool is_leaf) : is_leaf(is_leaf), parent(nullptr), next(nu
 BPlusTree::BPlusTree() : root(nullptr), degree(3), height(0) {}
 
 void BPlusTree::insert(int key, int value) {
+    std::unique_lock<std::mutex> lock(mutex_); // Exclusive lock during insertion
     if (root == nullptr) {
         root = new Node(true);
         root->keys.push_back(key);
@@ -99,6 +100,7 @@ int BPlusTree::searchInNode(Node* node, int key) {
 }
 
 int BPlusTree::search(int key) {
+    std::shared_lock<std::shared_mutex> lock(shared_mutex_); // Shared lock during searching
     if (root == nullptr) {
         return -1;
     }
