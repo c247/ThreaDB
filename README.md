@@ -1,6 +1,17 @@
 # ThreaDB
 Multi-threaded B-Plus Tree Key Value store database implementation using C++
 
+```
+g++ -std=c++17 main.cpp BPlusTree.cpp -o main.exe
+```
+
+```
+Commands:
+  i <key> <value>: Insert a key-value pair into the B+ tree.
+  s <key1> <key2> ...: Search for multiple keys in the B+ tree.
+  q: Quit the program.
+
+```
 
 ## Parallel Searching
 The B+ tree implementation supports parallel searching for multiple keys using multiple threads. When searching for multiple keys simultaneously, each key is searched using a separate thread to improve search performance. The results of each search are printed as the threads finish their search operations.
